@@ -50,31 +50,27 @@ public:
     }
 
     void Push(T element){
-        std::cout << top << " " << s_size << ' ';
-        if(top++ < s_size) {
+        if(top+1 < s_size) {
             top++;
             s_massive[top] = element;
         }
         else {
-            throw std::overflow_error("Error in Push");
+            throw std::overflow_error("Overflow in Push");
         }
     }
 
     void Pop(){
-        if(isEmpty() == true)
-            std::cout << "Error" << std::endl;
-        else{
+        if(isEmpty() != true)
             top--;
+        else{
+            throw std::out_of_range("in Pop");
         }
     }
 
     T Top(){
-        if(isEmpty() == true){
-            std::cout << "Error" << std::endl;
-            return -1;
-        }
-        else{
+        if(isEmpty() != true)
             return s_massive[top];
-        }
+        else
+            throw std::logic_error("in Top");
     }
 };

@@ -2,20 +2,27 @@
 #include "Stack.h"
 
 int main() {
-    Stack<int> stack(3);
+    Stack<int> stack(1);
     std::cout << "Size: " << stack.Size() << std::endl;
-    stack.Push(0);
-    stack.Push(1);
-    stack.Push(2);
     try {
-        stack.Push(3);
+        stack.Push(5);
     }
     catch(const std::overflow_error& e){
         std::cout << "Error: " << e.what() << std::endl;
     }
     std::cout << "Top: " << stack.Top() << std::endl;
-    stack.Pop();
+    try {
+        stack.Pop();
+    }
+    catch(const std::out_of_range& e){
+        std::cout << "Error: " << e.what() << std::endl;
+    }
     std::cout << "Size: " << stack.Size() << std::endl;
-    std::cout <<"Top: " << stack.Top() << std::endl;
+    try {
+        std::cout << stack.Top() << std::endl;
+    }
+    catch (const std::logic_error& e){
+        std::cout << "Error: " << e.what() << std::endl;
+    }
     return 0;
 }
