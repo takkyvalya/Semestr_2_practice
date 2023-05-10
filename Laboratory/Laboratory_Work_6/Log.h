@@ -38,40 +38,41 @@ public:
 
     static void Write(const std::string& msg)
     {
+        time_t now = time(0);
+        char* dt = ctime(&now);
         if(m_logLevel == LogLevel::DEBUG)
         {
-            time_t now = time(0);
-            char* dt = ctime(&now);
             m_h = GetStdHandle(STD_OUTPUT_HANDLE); //получаем наше окно, в котором нужно изменить цвет
             SetConsoleTextAttribute(m_h, 46);
             std::cerr << dt << msg << std::endl;
         }
-        m_out << msg << std::endl;
+        m_out << dt<< msg << std::endl;
         m_out.flush();
     }
 
     static void Info(const std::string& msg)
     {
+        time_t now = time(0);
+        char* dt = ctime(&now);
         if (m_logLevel == LogLevel::DEBUG) {
-            time_t now = time(0);
-            char* dt = ctime(&now);
+
             std::cerr << dt << msg << std::endl;
         }
-        m_out << msg << std::endl;
+        m_out << dt << msg << std::endl;
         m_out.flush();
     }
 
     static void Error(const std::string& msg)
     {
+        time_t now = time(0);
+        char* dt = ctime(&now);
         if (m_logLevel == LogLevel::DEBUG)
         {
             m_h = GetStdHandle(STD_OUTPUT_HANDLE); //получаем наше окно, в котором нужно изменить цвет
             SetConsoleTextAttribute(m_h, 01);
-            time_t now = time(0);
-            char* dt = ctime(&now);
             std::cerr << dt << msg << std::endl;
         }
-        m_out << msg << std::endl;
+        m_out <<dt<< msg << std::endl;
         m_out.flush();
     }
 
